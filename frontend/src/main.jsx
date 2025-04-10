@@ -5,7 +5,8 @@ import App from "./App.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 import { ChatProvider } from "./context/ChatContext.jsx";
 
-export const server = "http://localhost:5000";
+// export const server = "http://localhost:5000";
+export const server = "https://aichatbot-server-omby.onrender.com";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
