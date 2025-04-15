@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { server } from "../main";
 import toast from "react-hot-toast";
 
+
+const apiKey = import.meta.env.VITE_GEMINI_API;
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
@@ -16,7 +18,7 @@ export const ChatProvider = ({ children }) => {
     setPrompt("");
     try {
       const response = await axios({
-        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDULM61RWET4VOQaxfDBjkYSntnEhTTG0s",
+        url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
         method: "post",
         data: {
           contents: [{ parts: { text: prompt } }],
@@ -92,6 +94,9 @@ export const ChatProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   async function fetchMessages() {
+    if(!selected){
+      return;
+    }
     setLoading(true);
     try {
       const { data } = await axios.get(`${server}/api/chat/${selected}`, {
