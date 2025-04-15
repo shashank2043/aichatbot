@@ -14,7 +14,8 @@ export const loginUser = async (req, res) => {
       });
     }
 
-    const otp = String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
+    const otp = Math.floor(100000 + Math.random() * 900000); // Always 6-digit number
+
 
 
     const verifyToken = jwt.sign({ user, otp }, process.env.JWT_SECRET_2, {
